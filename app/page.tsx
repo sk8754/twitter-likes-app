@@ -2,6 +2,7 @@
 import { supabase } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 type tweet = {
   id: string;
@@ -42,7 +43,7 @@ export default function Home() {
     };
 
     getUser();
-  }, []);
+  }, [Router]); // Routerを依存関係に追加
 
   const getTweet = async () => {
     const tweetResponse = (await supabase
@@ -87,7 +88,11 @@ export default function Home() {
         <h1 className="text-3xl font-bold mb-4">Twitter Timeline</h1>
 
         <div className="flex gap-6 items-center ">
-          <img src="./imgs/pekora.jpg" className="h-20" />
+          <Image
+            src="./imgs/pekora.jpg"
+            className="h-20"
+            alt="Pekora's Profile Picture"
+          />
           <input
             type="text"
             className=" border-2 rounded-3xl w-full h-12"
@@ -109,7 +114,11 @@ export default function Home() {
 
         {tweetList.map((tweetList) => (
           <div className="flex items-center gap-4 mb-4" key={tweetList.id}>
-            <img src="./imgs/hubuki01.png" className="h-20" />
+            <Image
+              src="./imgs/hubuki01.png"
+              className="h-20"
+              alt="Hubuki's Profile Picture"
+            />
 
             <div className="border-2 w-full rounded-3xl pl-3">
               <h1 className="font-bold">{tweetList.userName}</h1>
